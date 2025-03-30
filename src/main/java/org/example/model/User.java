@@ -16,7 +16,9 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@Table(name = "users", indexes = {
+        @Index(name = "idx_user_email", columnList = "email", unique = true)
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +32,6 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
-
-    private double balance = 0.0; // Positive: Owed money, Negative: Needs to pay
 
     @CreationTimestamp
     private LocalDateTime createdAt;

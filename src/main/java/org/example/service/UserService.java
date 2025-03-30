@@ -6,8 +6,9 @@ import org.example.model.User;
 import org.example.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -36,5 +37,14 @@ public class UserService {
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User with email '" + email + "' not found."));
+    }
+
+    public Set<User> getAllUsersByEmail(Iterable<String> email) {
+        return new HashSet<>(userRepository.findAllByEmailIn(email));
+    }
+
+
+    public Integer checkIfAllEmailPresentInDb(Iterable<String> emails) {
+        return userRepository.countAllByEmailIn(emails);
     }
 }
