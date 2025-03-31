@@ -8,9 +8,9 @@ import java.util.Set;
 
 @Data
 @Builder
-public class ExpenseRequest {
+public class CreateExpenseRequest {
     private String description;
     private BigDecimal amount;
-    private String paidByUserEmail;
+    private String paidByEmail;
     private Set<String> participantEmails;
 }

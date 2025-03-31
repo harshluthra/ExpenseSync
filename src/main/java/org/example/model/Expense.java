@@ -5,50 +5,28 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "expenses")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "expenses")
 public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true, updatable = false)
-    private String uuid;
-
-    @Column(nullable = false)
     private String description;
-
-    @Column(nullable = false)
     private BigDecimal amount;
-
-    @ManyToOne
-    @JoinColumn(name = "paid_by", nullable = false)
-    private User paidBy;
-
-    @ManyToMany
-    @JoinTable(
-            name = "expense_participants",
-            joinColumns = @JoinColumn(name = "expense_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<User> participants;
-
     private LocalDateTime createdAt;
 
-    @PrePersist
-    protected void onCreate() {
-        if (uuid == null) {
-            uuid = UUID.randomUUID().toString();
-        }
-        createdAt = LocalDateTime.now();
-    }
+    @ManyToOne
+    private User paidBy;
+
+    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL)
+    private List<ExpenseParticipant> participants = new ArrayList<>();
 }

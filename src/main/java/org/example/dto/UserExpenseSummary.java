@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class ParticipantResponse {
-    private String name;
-    private String email;
-    private BigDecimal amountOwed;
-    private BigDecimal amountToReceive;
+@NoArgsConstructor
+public class UserExpenseSummary {
+    private BigDecimal netBalance;
+    private List<CreateExpenseResponse> expenses;
 }
