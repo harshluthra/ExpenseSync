@@ -1,0 +1,346 @@
+{
+	"info": {
+		"_postman_id": "d87c22fa-8627-4cc9-a1ea-23f5ef653feb",
+		"name": "Expense Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Users 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/users?name=krish&email=krish@example.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "krish"
+						},
+						{
+							"key": "email",
+							"value": "krish@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Users 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/users?name=Janhvi&email=janhvi@example.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Janhvi"
+						},
+						{
+							"key": "email",
+							"value": "janhvi@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Users 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/users?name=Harsh&email=harsh@example.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Harsh"
+						},
+						{
+							"key": "email",
+							"value": "harsh@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch User by Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/email?email=harsh@example.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "harsh@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an Expense 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"snacks\",\n    \"amount\": 1000,\n    \"paidByEmail\": \"harsh@example.com\",\n    \"participantEmails\": [\n        \"janhvi@example.com\",\n        \"krish@example.com\",\n        \"harsh@example.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an Expense 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Dinner\",\n    \"amount\": 1500,\n    \"paidByEmail\": \"krish@example.com\",\n    \"participantEmails\": [\n        \"janhvi@example.com\",\n        \"krish@example.com\",\n        \"harsh@example.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an Expense 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Dinner\",\n    \"amount\": 500,\n    \"paidByEmail\": \"janhvi@example.com\",\n    \"participantEmails\": [\n        \"janhvi@example.com\",\n        \"krish@example.com\",\n        \"harsh@example.com\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Expenses for a User (Without Participants)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/expenses?email=krish@example.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expenses"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "krish@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Expenses for a User (With Participants)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/expenses?email=krish@example.com&showParticipants=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expenses"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "krish@example.com"
+						},
+						{
+							"key": "showParticipants",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balance raw",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/balances/raw?email=krish@example.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"balances",
+						"raw"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "krish@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balance simplified",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/balances/simplified?email=krish@example.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"balances",
+						"simplified"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "krish@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
