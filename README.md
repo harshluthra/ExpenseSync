@@ -10,7 +10,6 @@ A backend service built using **Spring Boot** that helps a group of users manage
 
 - Java 17
 - Maven
-- Any SQL database (e.g., PostgreSQL, MySQL)
 
 ### ▶️ Steps
 
@@ -92,7 +91,7 @@ Allows users to record shared expenses.
 
   - Adds a new expense where the amount is split among participants
     - Supports different split types: `EQUAL`, `EXACT`, `PERCENT`
-      - For now, only `EQUAL` and `EXACT` is functional;  `PERCENT` are placeholders for future logic
+      - For now, only `EQUAL` and `EXACT` is functional;  `PERCENT` is a placeholder for future logic
         - Request Body for `EQUAL`:
           ```json
           {
@@ -197,7 +196,6 @@ If you'd like to try out all the APIs quickly, a Postman collection is available
 
 ## 📌 Notes
 
-- All amounts are split equally among participants.
 - Each expense must include the payer in the list of participants.
 - The simplified API uses a greedy algorithm to minimize total number of transactions.
 
