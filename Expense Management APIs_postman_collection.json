@@ -15,8 +15,12 @@
 						"value": "application/json"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Krish\",\n    \"email\": \"krish@example.com\"\n}"
+				},
 				"url": {
-					"raw": "http://localhost:8080/users?name=krish&email=krish@example.com",
+					"raw": "http://localhost:8080/users",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -28,11 +32,13 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "krish"
+							"value": "krish",
+							"disabled": true
 						},
 						{
 							"key": "email",
-							"value": "krish@example.com"
+							"value": "krish@example.com",
+							"disabled": true
 						}
 					]
 				}
@@ -49,8 +55,12 @@
 						"value": "application/json"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Harsh\",\n    \"email\": \"harsh@example.com\"\n}"
+				},
 				"url": {
-					"raw": "http://localhost:8080/users?name=Janhvi&email=janhvi@example.com",
+					"raw": "http://localhost:8080/users",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -62,11 +72,13 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "Janhvi"
+							"value": "Janhvi",
+							"disabled": true
 						},
 						{
 							"key": "email",
-							"value": "janhvi@example.com"
+							"value": "janhvi@example.com",
+							"disabled": true
 						}
 					]
 				}
@@ -83,8 +95,12 @@
 						"value": "application/json"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Janhvi\",\n    \"email\": \"janhvi@example.com\"\n}"
+				},
 				"url": {
-					"raw": "http://localhost:8080/users?name=Harsh&email=harsh@example.com",
+					"raw": "http://localhost:8080/users",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -96,11 +112,13 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "Harsh"
+							"value": "Harsh",
+							"disabled": true
 						},
 						{
 							"key": "email",
-							"value": "harsh@example.com"
+							"value": "harsh@example.com",
+							"disabled": true
 						}
 					]
 				}
@@ -132,15 +150,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/email?email=harsh@example.com",
+					"raw": "http://localhost:8080/users?email=harsh@example.com",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"users",
-						"email"
+						"users"
 					],
 					"query": [
 						{
@@ -153,7 +170,7 @@
 			"response": []
 		},
 		{
-			"name": "Create an Expense 1",
+			"name": "Create an EQUAL Expense 1",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -164,7 +181,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"description\": \"snacks\",\n    \"amount\": 1000,\n    \"paidByEmail\": \"harsh@example.com\",\n    \"participantEmails\": [\n        \"janhvi@example.com\",\n        \"krish@example.com\",\n        \"harsh@example.com\"\n    ]\n}"
+					"raw": "{\n  \"description\": \"Hotel\",\n  \"amount\": 500,\n  \"paidByEmail\": \"janhvi@example.com\",\n  \"splitType\": \"EQUAL\",\n  \"participants\": [\n    { \"email\": \"krish@example.com\", \"share\": 1000 },\n    { \"email\": \"janhvi@example.com\", \"share\": 1000 },\n    { \"email\": \"harsh@example.com\", \"share\": 1000 }\n  ]\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/expenses",
@@ -181,7 +198,7 @@
 			"response": []
 		},
 		{
-			"name": "Create an Expense 2",
+			"name": "Create an EQUAL Expense 2",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -192,7 +209,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"description\": \"Dinner\",\n    \"amount\": 1500,\n    \"paidByEmail\": \"krish@example.com\",\n    \"participantEmails\": [\n        \"janhvi@example.com\",\n        \"krish@example.com\",\n        \"harsh@example.com\"\n    ]\n}"
+					"raw": "{\n  \"description\": \"Dinner\",\n  \"amount\": 1000,\n  \"paidByEmail\": \"harsh@example.com\",\n  \"splitType\": \"EQUAL\",\n  \"participants\": [\n    { \"email\": \"krish@example.com\"},\n    { \"email\": \"janhvi@example.com\" },\n    { \"email\": \"harsh@example.com\"}\n  ]\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/expenses",
@@ -209,7 +226,7 @@
 			"response": []
 		},
 		{
-			"name": "Create an Expense 3",
+			"name": "Create an EXACT Expense",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -220,7 +237,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"description\": \"Dinner\",\n    \"amount\": 500,\n    \"paidByEmail\": \"janhvi@example.com\",\n    \"participantEmails\": [\n        \"janhvi@example.com\",\n        \"krish@example.com\",\n        \"harsh@example.com\"\n    ]\n}"
+					"raw": "{\n  \"description\": \"Dinner\",\n  \"amount\": 1500,\n  \"paidByEmail\": \"krish@example.com\",\n  \"splitType\": \"EXACT\",\n  \"participants\": [\n    { \"email\": \"krish@example.com\", \"share\": 500 },\n    { \"email\": \"janhvi@example.com\", \"share\": 500 },\n    { \"email\": \"harsh@example.com\", \"share\": 500 }\n  ]\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/expenses",
