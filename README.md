@@ -202,4 +202,28 @@ If you'd like to try out all the APIs quickly, a Postman collection is available
 - The simplified API uses a greedy algorithm to minimize total number of transactions.
 
 ---
+## 🧠 Algorithms Used
+
+### Raw Balance Calculation
+
+- Iterates over all expenses for a user.
+- For each expense:
+  - If the user is the payer, others owe them equally.
+  - If the user is a participant but not the payer, they owe their share.
+- Aggregates net amounts between users (payer vs participant).
+- While raw balance doesn’t aim to minimize transactions, we apply small optimizations like:
+  - Batching repeated counterparties *(same person appearing multiple times).*
+  - Skipping offsetting transactions *(e.g., A owes B ₹100 and B owes A ₹100 → net 0).*
+
+### Simplified Balance Calculation
+
+- Calculates net balance for each user (amount paid - amount owed).
+- Categorizes users as:
+  - Creditors: Net positive balance.
+  - Debtors: Net negative balance.
+- Uses a **greedy matching algorithm**:
+  - Matches largest debtor with largest creditor.
+  - Transfers the smallest possible amount to reduce outstanding balances.
+  - Repeats until all balances are settled.
+- Result: Minimum number of transactions needed for full group settlement.
 
