@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
@@ -12,5 +12,6 @@ public class CreateExpenseRequest {
     private String description;
     private BigDecimal amount;
     private String paidByEmail;
-    private Set<String> participantEmails;
+    private SplitType splitType;
+    private List<ParticipantDTO> participants;
 }

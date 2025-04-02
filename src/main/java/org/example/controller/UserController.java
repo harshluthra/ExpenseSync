@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import org.example.dto.CreateUserRequest;
+import org.example.dto.UserResponse;
 import org.example.model.User;
 import org.example.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +19,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestParam String name, @RequestParam String email) {
-        return ResponseEntity.ok(userService.createUser(name, email));
+    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
+        return ResponseEntity.ok(userService.createUser(request));
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
-    }
-
-    @GetMapping("/email")
-    public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
-        return ResponseEntity.ok(userService.getUserByEmail(email));
+    public ResponseEntity<List<UserResponse>> getAllUsers(@RequestParam(required = false) String email) {
+        return ResponseEntity.ok(userService.getAllUsers(email));
     }
 }

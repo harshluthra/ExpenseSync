@@ -10,7 +10,7 @@ A backend service built using **Spring Boot** that helps a group of users manage
 
 - Java 17
 - Maven
-- Hibernate
+- Any SQL database (e.g., PostgreSQL, MySQL)
 
 ### ▶️ Steps
 
@@ -47,34 +47,37 @@ Handles creation and listing of users.
 - `POST /users`
 
   - Creates a new user
-  - Request Params: `name`, `email`
+  - Request Body:
+    ```json
+    {
+      "name": "xyz",
+      "email": "xyz@example.com"
+    }
+    ```
   - Example:
     ```bash
-    curl --location --request POST 'http://localhost:8080/users?name=xyz&email=xyz@example.com' \
-    --header 'Content-Type: application/json'
+    curl --location --request POST 'http://localhost:8080/users' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+      "name": "xyz",
+      "email": "xyz@example.com"
+    }'
     ```
   - Response:
     ```json
     {
-      "id": 1,
-      "uuid": "46a383e9-6fbd-4c75-ae4a-ffe289e1f0f4",
-      "name": "xyz",
-      "email": "xyz@example.com",
-      "createdAt": "2025-04-01T03:26:41.096567",
-      "updatedAt": "2025-04-01T03:26:41.096652"
+        "uuid": "46a383e9-6fbd-4c75-ae4a-ffe289e1f0f4",
+        "name": "xyz", 
+        "email": "xyz@example.com" 
     }
     ```
 
 - `GET /users`
 
-  - Returns list of all users
-
-- `GET /users/email?email=xyz@example.com`
-
-  - Fetches a user by email
+  - Fetches all users, or a specific user if `email` query param is provided
   - Example:
     ```bash
-    curl --location --request GET 'http://localhost:8080/users/email?email=xyz@example.com'
+    curl --location --request GET 'http://localhost:8080/users?email=xyz@example.com'
     ```
 
 ---
@@ -87,19 +90,72 @@ Allows users to record shared expenses.
 
 - `POST /expenses`
 
-  - Adds a new expense where the amount is split equally among all participants
-  - Request Body:
-    ```json
-    {
-      "description": "Dinner",
-      "amount": 1500,
-      "paidByEmail": "krish@example.com",
-      "participantEmails": ["krish@example.com", "janhvi@example.com", "harsh@example.com"]
-    }
-    ```
-  - Returns: the expense details along with amount owed and amount to receive by each user
+  - Adds a new expense where the amount is split among participants
+    - Supports different split types: `EQUAL`, `EXACT`, `PERCENT`
+      - For now, only `EQUAL` and `EXACT` is functional;  `PERCENT` are placeholders for future logic
+        - Request Body for `EQUAL`:
+          ```json
+          {
+            "description": "Dinner",
+            "amount": 1500,
+            "paidByEmail": "krish@example.com",
+            "splitType": "EQUAL",
+            "participants": [
+              { "email": "krish@example.com" },
+              { "email": "janhvi@example.com" },
+              { "email": "harsh@example.com" }
+            ]
+          }
+          ```
 
-- `GET /expenses/by-user?email=xyz@example.com&showParticipants=true`
+        - Request Body for `EXACT`:
+            ```json
+            {
+                "description": "Dinner",
+                "amount": 900,
+                "paidByEmail": "janhvi@example.com",
+                "splitType": "EXACT",
+                "participants": [
+                    { "email": "krish@example.com", "share": 300 },
+                    { "email": "janhvi@example.com", "share": 300 },
+                    { "email": "harsh@example.com", "share": 300 }
+                ]
+            }
+          ```
+      - Returns: the expense details along with amount owed and amount to receive by each user
+       ```json
+       {
+        "id": 4,
+        "description": "Dinner",
+        "amount": 900,
+        "paidBy": {
+          "email": "janhvi@example.com",
+          "name": "Janhvi"
+        },
+        "participants": [
+          {
+              "name": "Krish",
+              "email": "krish@example.com",
+              "amountOwed": 300,
+              "amountToReceive": 0
+          },
+          {
+              "name": "Harsh",
+              "email": "harsh@example.com",
+              "amountOwed": 300,
+              "amountToReceive": 0
+          },
+          {
+              "name": "Janhvi",
+              "email": "janhvi@example.com",
+              "amountOwed": 0,
+              "amountToReceive": 600
+          }
+        ],
+        "createdAt": "2025-04-02T14:53:30.640135"
+      }
+      ```
+- `GET /expenses?email=xyz@example.com&showParticipants=true`
 
   - Fetches expenses that involve the given user
   - Optional flag `showParticipants` to include participant-level breakdown

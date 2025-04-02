@@ -38,4 +38,9 @@ public class User {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 }
